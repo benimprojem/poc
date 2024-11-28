@@ -1,54 +1,71 @@
-# poc
-The following list of features is required to compile a POC language:
+Tamamen Fonksiyonel programlama  fnPi dilini derlemek için aşağıdaki liste gerekli özelliklere sahiptir:
+ 1: Lexer.h
+ 2: Parse.h
+ 3: Semantic.h
+ 4: IRGenerator.h
+ 5: Optimizer.h
+ 6: CodeEmiter.h
+ 7: MemoryManager.h
+ 8: RuntimeEnvi.h
+ 9: Debugging.h
+10: Performance.h
+11: fnPicomp.cpp
 
-Lexer (Lexical Analyzer):
-Word analysis algorithm
-Special word keys and symbols definition
-Code block parsing
-Comment and string parsing
+kütüphane Kendisini derlemek için gerekli tüm fonksiyon ve metotları içermelidir.
+12: library/ klasör 
+13: kütüphane oluştur. örnek: std.lib, io.lib, math.lib, memory.lib, string.lib, files.lib, sqlite.lib ...
 
-Parser:
-Grammar rules
-AST (Abstract Syntax Tree) structure
-Syntax checking and debugging
+14: piCom.exe // oluştur.
+15: example.pi // derle....
 
-Semantic Analyser:
-Typing and type checking
-Context checking
-Debugging and warnings
 
-Intermediate Representation (IR) Generator:
-Translating AST to IR code
-Storing necessary information for optimization
 
-Optimizer:
-Code movement
-Redundancy elimination
-Constant expression evaluation
-Evaluation optimization
 
-Code Emitter:
-Translating IR code to machine code
-Register allocation
-Memory management
-Control flow optimization
+Lexer (Lexical Analyzer): 
+Kelime analizi algoritması
+Özel kelime anahtarları ve semboller tanımlaması
+Kod bloğu ayrıştırma
+Comment ve string parsing
 
-Memory Manager:
-Memory allocation and deallocation
-Garbage collection (optional)
+Parser: 
+Gramer kuralları
+AST (Abstract Syntax Tree) yapısı
+Sözdizimi kontrolü ve hata ayıklama
+
+Semantic Analyser: 
+Tiplendirme ve tür kontrolü
+Bağlam kontrolü
+Hata ayıklama ve uyarılar
+
+Intermediate Representation (IR) Generator: 
+AST'yi IR koduna çevirme
+Optimizasyon için gerekli bilgiler saklama
+
+Optimizer: 
+Kod hareketi
+Redundans eliminasyonu
+Sabit ifade değerlendirme
+Değerlendirme optimizasyonu
 
 Runtime Environment:
-Standard library modules
-System calls
-Error handling
+Standart kütüphane modülleri
+Sistem çağrıları
+Hata yönetimi
 
 Debugging Support:
-Error messages and location information
-Debugging mode
+Hata mesajları ve konumlandırma bilgileri
+Debugging modu
+
+Code Emitter: 
+IR kodu makine koduna çevirme
+Register tahsisatı
+Bellek yönetimi
+Bellek tahsisi ve serbest bırakma
+Kontrol akışı optimizasyonu
 
 Performance Profiling:
-Time and memory profile
-Optimization suggestions
+Zaman ve bellek profili
+Optimizasyon önerileri
 
-These components will form the basic structure required to compile the Poc language.
-Each component is written in C++ and customized to the specific features of the POC language.
+
+Bu bileşenler, fnpi dilini derlemek için gerekli temel yapıyı oluşturacaktır. 

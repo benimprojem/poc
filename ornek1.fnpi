@@ -1,0 +1,4 @@
+// test_program.fnpi
+func main() {
+    print("Merhaba, dünya!");
+}

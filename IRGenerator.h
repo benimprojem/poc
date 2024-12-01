@@ -1,45 +1,47 @@
-#pragma once
+#ifndef IRGENERATOR_H
+#define IRGENERATOR_H
 
-#include "ast.h"
-#include "lexer.h"
-#include <string>
+#include <iostream>
 #include <vector>
-#include <unordered_map>
+#include <string>
+#include "Parser.h"
 
 class IRGenerator {
-private:
-    std::string irCode;
-    std::vector<std::string> labels;
-    std::unordered_map<std::string, int> variableRegisters;
-    int registerCounter;
-
 public:
-    IRGenerator();
+    enum class InstructionType {
+        ADD,
+        SUB,
+        MUL,
+        DIV,
+        MOD,
+        ASSIGN,
+        JUMP,
+        JUMP_IF,
+        LABEL,
+        PRINT,
+        FUNCTION_CALL,
+        RETURN
+    };
 
-    std::string generateIR(ASTNode* root);
+    struct IRInstruction {
+        InstructionType type;
+        std::string operand1;
+        std::string operand2;
+        std::string result;
+    };
 
-    // Ast düğümlerini işleyen yardımcı metotlar
-    void generateExpressionIR(ASTNode* node);
-    void generateStatementIR(ASTNode* node);
-    void generateBlockIR(ASTNode* node);
-    void generateFunctionIR(ASTNode* node);
-    void generateClassIR(ASTNode* node);
+    std::vector<IRInstruction> generate_ir(const std::vector<Parser::ASTNode>& ast_nodes);
 
-    // Özel IR kodları üreten metotlar
-    std::string generateLoadInstruction(const std::string& variableName);
-    std::string generateStoreInstruction(const std::string& variableName);
-    std::string generateBinaryOpInstruction(TokenType op, const std::string& leftReg, const std::string& rightReg);
-    std::string generateUnaryOpInstruction(TokenType op, const std::string& reg);
-    std::string generateJumpInstruction(const std::string& label);
-    std::string generateConditionalJumpInstruction(TokenType condition, const std::string& leftReg, const std::string& rightReg, const std::string& label);
+private:
+    void generate_expression_ir(const Parser::ASTNode& node, std::vector<IRInstruction>& ir_instructions);
+    void generate_statement_ir(const Parser::ASTNode& node, std::vector<IRInstruction>& ir_instructions);
+    void generate_function_declaration_ir(const Parser::ASTNode& node, std::vector<IRInstruction>& ir_instructions);
+    void generate_if_statement_ir(const Parser::ASTNode& node, std::vector<IRInstruction>& ir_instructions);
+    void generate_for_loop_ir(const Parser::ASTNode& node, std::vector<IRInstruction>& ir_instructions);
+    void generate_while_loop_ir(const Parser::ASTNode& node, std::vector<IRInstruction>& ir_instructions);
+    void generate_print_statement_ir(const Parser::ASTNode& node, std::vector<IRInstruction>& ir_instructions);
 
-    // Kayıt yönetimi
-    std::string allocateRegister();
-    void freeRegister(const std::string& reg);
-
-    // Etiket yönetimi
-    std::string createLabel();
-
-    // Hata raporlama
-    void reportIRGenerationError(const std::string& message);
+    IRInstruction create_instruction(InstructionType type, const std::string& operand1 = "", const std::string& operand2 = "", const std::string& result = "");
 };
+
+#endif // IRGENERATOR_H
